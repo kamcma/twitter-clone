@@ -1,0 +1,16 @@
+@page
+@model TwitterClone.Pages.RegisterPage
+
+<form method="POST">
+    <label asp-for="FirstName"></label>
+    <input asp-for="FirstName" />
+    <label asp-for="LastName"></label>
+    <input asp-for="LastName" />
+    <label asp-for="EmailAddress"></label>
+    <input asp-for="EmailAddress" />
+    <label asp-for="Password"></label>
+    <input asp-for="Password" />
+    <label asp-for="ConfirmPassword"></label>
+    <input asp-for="ConfirmPassword" />
+    <input type="submit" />
+</form>

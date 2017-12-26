@@ -1,0 +1,33 @@
+@page
+@model TwitterClone.Pages.IndexPage
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Logged in</p>
+    <p>Post new tweet:</p>
+    <form asp-antiforgery="true" method="POST">
+        <input asp-for="NewTweetBody" />
+        <input asp-page-handler="Tweet" type="submit" />
+    </form>
+    <form method="POST">
+        <input asp-page-handler="Logout" type="submit" value="Logout" />
+    </form>
+}
+else
+{
+    <p>Log in:</p>
+    <form asp-antiforgery="true" method="POST">
+        <label asp-for="EmailAddress"></label>
+        <input asp-for="EmailAddress" />
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <input asp-page-handler="Login" type="submit" />
+    </form>
+}
+
+<ul>
+    @foreach (var tweet in Model.Tweets)
+    {
+        <li>@tweet.Body</li>
+    }
+</ul>
