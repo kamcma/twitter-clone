@@ -1,6 +1,4 @@
-using System.Linq;
-
-namespace TwitterClone.Data
+namespace System.Linq
 {
     public static class IQueryableExtensions
     {
