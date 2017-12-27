@@ -25,7 +25,7 @@ namespace TwitterClone.Pages
 
             if (Tweet == null)
             {
-                throw new Exception();
+                return RedirectToPage("/Index");
             }
 
             return Page();

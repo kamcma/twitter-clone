@@ -58,7 +58,7 @@ namespace TwitterClone.Pages
             db.Users.Add(user);
             await db.SaveChangesAsync();
             
-            return RedirectToAction(nameof(IndexPage.OnGetAsync));
+            return RedirectToPage("/Index");
         }
     }
 }

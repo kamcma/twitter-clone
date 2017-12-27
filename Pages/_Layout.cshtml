@@ -1,9 +1,24 @@
+@using System.Security.Claims
+
 <!DOCTYPE html>
 <html>
 <head> 
     <title>Twitter Clone</title>
 </head>
 <body>
+    <p>start layout page</p>
+    <a asp-page="Index">Home</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>@User.Claims.First(c => c.Type == ClaimTypes.Email)?.Value</p>
+        <a asp-controller="Authentication" asp-action="Logout">Logout</a>
+    }
+    else
+    {
+        <a asp-page="Register">Register</a>
+        <a asp-page="Login">Login</a>
+    }
+    <p>end layout page</p>
     @RenderBody()
 </body>
 </html>
