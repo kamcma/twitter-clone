@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using TwitterClone.Data;
 
 namespace TwitterClone
@@ -19,9 +21,11 @@ namespace TwitterClone
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetConnectionString("DATABASE_URL");
+            var dbUri = new Uri(Configuration["DATABASE_URL"]);
+            var builder = new NpgsqlConnectionStringBuilder().FromUri(dbUri);
             services.AddDbContext<TwitterCloneContext>(options =>
-                options.UseNpgsql(connectionString));
+                options.UseNpgsql(builder.ConnectionString)
+            );
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => options.LoginPath = "/");
